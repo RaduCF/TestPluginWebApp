@@ -8,17 +8,17 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   videoItems = [
     {
-      name: 'Video one',
-      src: 'http://static.videogular.com/assets/videos/videogular.mp4',
-      type: 'video/mp4',
-    },
-    {
-      name: 'Video two',
+      name: 'Big Buck Bunny',
       src: 'http://static.videogular.com/assets/videos/big_buck_bunny_720p_h264.mov',
       type: 'video/mp4',
     },
     {
-      name: 'Video three',
+      name: 'Business Intelligence Presentation',
+      src: 'assets/videos/2021-06-07 00-58-24.mp4',
+      type: 'video/mp4',
+    },
+    {
+      name: 'Elephants Dream',
       src: 'http://static.videogular.com/assets/videos/elephants-dream.mp4',
       type: 'video/mp4',
     },
