@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { VideoService } from '../../shared/services/video.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class HomeComponent implements OnInit {
+  videoName: String = '';
   videoItems = [
     {
       name: 'Big Buck Bunny',
@@ -28,9 +30,14 @@ export class AppComponent implements OnInit {
   currentVideo = this.videoItems[this.activeIndex];
   data: any;
 
-  constructor() {}
+  constructor(private videoService: VideoService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // this.videoService.getVideoName();
+    // this.videoService.videoName$.subscribe((v) => {
+    //   this.videoName = v;
+    // });
+  }
 
   videoPlayerInit(data: any): void {
     this.data = data;
