@@ -7,16 +7,17 @@ import { VideoService } from '../../shared/services/video.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  videoName: String = '';
+  private videoName = '';
+
   videoItems = [
-    {
-      name: 'Big Buck Bunny',
-      src: 'http://static.videogular.com/assets/videos/big_buck_bunny_720p_h264.mov',
-      type: 'video/mp4',
-    },
     {
       name: 'Business Intelligence Presentation',
       src: 'assets/videos/BUI-Presentation.mp4',
+      type: 'video/mp4',
+    },
+    {
+      name: 'Big Buck Bunny',
+      src: 'http://static.videogular.com/assets/videos/big_buck_bunny_720p_h264.mov',
       type: 'video/mp4',
     },
     {
@@ -29,6 +30,7 @@ export class HomeComponent implements OnInit {
   activeIndex = 0;
   currentVideo = this.videoItems[this.activeIndex];
   data: any;
+  duration = 0;
 
   constructor(private videoService: VideoService) {}
 
@@ -50,6 +52,20 @@ export class HomeComponent implements OnInit {
       .subscriptions.ended.subscribe(this.nextVideo.bind(this));
   }
 
+  refreshLatestVideo(): void {
+    // this.videoService.getVideoName();
+    this.currentVideo = this.videoItems[this.activeIndex];
+
+    const video = document.createElement('video');
+    video.preload = 'metadata';
+
+    video.onloadedmetadata = () => {
+      window.URL.revokeObjectURL(this.currentVideo.src);
+      this.duration = video.duration;
+    };
+    console.log(video);
+  }
+
   nextVideo(): void {
     this.activeIndex++;
 
@@ -58,6 +74,14 @@ export class HomeComponent implements OnInit {
     }
 
     this.currentVideo = this.videoItems[this.activeIndex];
+
+    const video = document.createElement('video');
+    video.preload = 'metadata';
+
+    video.onloadedmetadata = () => {
+      window.URL.revokeObjectURL(this.currentVideo.src);
+      this.duration = video.duration;
+    };
   }
 
   initVdo(): void {
